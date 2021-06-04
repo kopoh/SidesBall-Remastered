@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
-    public GameObject Player;
-    
+
+    public Transform PlatformTransform;
     private Transform playerTransform;
     public float spawnZ = 40.7f;
     public float tileLength = 73.7f;
@@ -18,10 +18,10 @@ public class PlatformController : MonoBehaviour
    
     private void Start()  
     {
+        Application.targetFrameRate = 60;
         activeTiles = new List<GameObject>();
-        playerTransform = Player.transform;
-        
-        
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
         for (int i = 0; i < amnTilesOnScreen; i++) 
         {
             if (i < 1)
@@ -33,7 +33,7 @@ public class PlatformController : MonoBehaviour
     private void Update()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
+        PlatformTransform.SetPositionAndRotation(new Vector3(0,0, playerTransform.position.z), new Quaternion(0,0,0,0));
         if (playerTransform.position.z - safeZone > (spawnZ - amnTilesOnScreen * tileLength)) 
         {
             SpawnTile ();
@@ -48,11 +48,10 @@ public class PlatformController : MonoBehaviour
             go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
         else
             go = Instantiate(tilePrefabs[prefabIndex]) as GameObject;
-        go.transform.SetParent(transform); //вот тут трансформ в говне исправь вечером пж 
-        go.transform.position += Vector3.forward * spawnZ;
+        go.transform.SetParent (transform);
+        go.transform.position = Vector3.forward * spawnZ;
         spawnZ += tileLength;
         activeTiles.Add (go);
-        
     }
 
 
