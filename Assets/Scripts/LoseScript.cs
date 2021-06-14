@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,21 @@ using UnityEngine.Events;
 
 public class LoseScript : MonoBehaviour
 {
-    UnityEvent m_MyEvent;
+    public UnityEvent LoseEvent;
 
     void Start()
     {
-        if (m_MyEvent == null)
-            m_MyEvent = new UnityEvent();
+        if (LoseEvent == null)
+            LoseEvent = new UnityEvent();
 
-        m_MyEvent.AddListener(Ping);
+        LoseEvent.AddListener(Ping);
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.anyKeyDown && m_MyEvent != null)
+        if (other.CompareTag("Player") && LoseEvent != null)
         {
-            m_MyEvent.Invoke();
+            LoseEvent.Invoke();
         }
     }
 
@@ -28,3 +29,14 @@ public class LoseScript : MonoBehaviour
         Debug.Log("Ping");
     }
 }
+ 
+
+
+
+
+
+
+/*if (Input.anyKeyDown && m_MyEvent != null)
+        {
+            
+        }*/
