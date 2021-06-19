@@ -8,13 +8,7 @@ public class MenuMiniGame : MonoBehaviour
 {
     [Range(1, 10)] public float Delta;
     public GameObject StartObj;
-    public GameObject FinishObj;
-
-    void Start()
-    {
-
-    }
-
+    public GameObject FinishObj; 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MenuGameSphere"))
@@ -25,8 +19,6 @@ public class MenuMiniGame : MonoBehaviour
                     StartObj.transform.position.z);
             }
         }
-        
-        Debug.Log("хуй" + other.tag);
     }
     
 }

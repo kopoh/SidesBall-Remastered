@@ -25,10 +25,10 @@
 public static class GPGSIds
 {
         public const string achievement_first_1000 = "CgkIjqSPppUVEAIQAw"; // <GPGSID>
-        public const string achievement_goodluck = "CgkIjqSPppUVEAIQAQ"; // <GPGSID>
         public const string achievement_youre_cheateeer = "CgkIjqSPppUVEAIQBg"; // <GPGSID>
         public const string leaderboard_score_leaderboard = "CgkIjqSPppUVEAIQAg"; // <GPGSID>
         public const string achievement_first_2000 = "CgkIjqSPppUVEAIQBA"; // <GPGSID>
+        public const string achievement_good_luck = "CgkIjqSPppUVEAIQAQ"; // <GPGSID>
         public const string achievement_wow_5000 = "CgkIjqSPppUVEAIQBQ"; // <GPGSID>
 
 }

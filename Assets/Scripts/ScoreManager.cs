@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+   public TMP_Text Text1;
    public GameObject player;
    [SerializeField] private Text _textscore;
    public int intscore;
@@ -13,6 +15,6 @@ public class ScoreManager : MonoBehaviour
    private void FixedUpdate()
    {
       intscore = Convert.ToInt32(player.transform.position.z);
-      _textscore.text = intscore.ToString();
+      Text1.text = _textscore.text = intscore.ToString();
    }
 }
