@@ -9,14 +9,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public int Speed = 1;
+    public int Speed = 140;
     public float sensitivity = 40f;
     public TMP_Text TMPscore;
     public Text _textscore;
     public Text _texthighscore;
+    public Text _pausetexthighscore;
 
     public UnityEvent LoseEvent;
     private Rigidbody player;
+    private float CurrentSencitivity; //блет ну можно было же назвать CurSence;
     private SafeInt intscore;
     private SafeInt highscore;
     private void Start()
@@ -37,11 +39,11 @@ public class PlayerController : MonoBehaviour
         player.AddForce(Input.acceleration.x * sensitivity, 0, Time.deltaTime * Speed, ForceMode.Force);
         intscore = Convert.ToInt32(player.transform.position.z);
         TMPscore.text = _textscore.text = intscore.ToString();
-        _texthighscore.text = highscore.ToString();
+        _pausetexthighscore.text = _texthighscore.text = highscore.ToString();
         
-        if (player.position.x >= 3.50f || player.position.y >= -2f || player.position.x >= -3.50f) //проверяем игрока на вылет из игровой зоны по координама, по идее можно было через простые тригеры, но кодом надежнее
-        {    //бля костыль бесит, но ничего лучше я не придумаю
-            player.transform.localPosition = new Vector3(0, 0, player.position.z);
+        if (player.position.x >= 3.50f || player.position.y <= -2f || player.position.x <= -3.50f) //проверяем игрока на вылет из игровой зоны по координама, по идее можно было через простые тригеры, но кодом надежнее
+        {    //бля костыль бесит, но ничего лучше я не придумал
+            player.transform.position = new Vector3(0, 0, player.position.z);
         }
         
         if (intscore >= highscore) //переопределяем очки

@@ -29,14 +29,3 @@ public class LoseScript : MonoBehaviour
         Debug.Log("Ping");
     }
 }
- 
-
-
-
-
-
-
-/*if (Input.anyKeyDown && m_MyEvent != null)
-        {
-            
-        }*/
