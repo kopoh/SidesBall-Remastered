@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 153359764}
   - component: {fileID: 153359763}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NO Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Are you sure you want to exit?
+  m_Text: Are you sure?
 --- !u!222 &214271384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2605,7 +2605,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: GameScene
+          m_StringArgument: Game
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &638372168
@@ -3119,7 +3119,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: YES
+  m_Text: EXIT
 --- !u!222 &717220358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6592,6 +6592,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 690371778}
         m_TargetAssemblyTypeName: PlayGamesScript, Assembly-CSharp
+        m_MethodName: AddScoreToLeaderboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 690371778}
+        m_TargetAssemblyTypeName: PlayGamesScript, Assembly-CSharp
         m_MethodName: ShowLeaderboardsUI
         m_Mode: 1
         m_Arguments:
@@ -8194,7 +8206,7 @@ GameObject:
   - component: {fileID: 2091662862}
   - component: {fileID: 2091662861}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: 'Yes Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

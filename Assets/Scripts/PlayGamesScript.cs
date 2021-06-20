@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayGamesScript : MonoBehaviour {
 
+    private SafeInt highscore;
     // Use this for initialization
     public void Start () {
+        highscore = PlayerPrefsSafe.GetInt("highscorepoints", 0);
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();
@@ -34,11 +36,13 @@ public class PlayGamesScript : MonoBehaviour {
         Social.ShowAchievementsUI();
     }
     #endregion /Achievements
-
+//AddScoreToLeaderboard("leaderboard_score_leaderboard", highscore);
     #region Leaderboards
-    public static void AddScoreToLeaderboard(string leaderboardId, long score)
+    
+    public void AddScoreToLeaderboard()
     {
-        Social.ReportScore(score, leaderboardId, success => { });
+        //AddScoreToLeaderboard("leaderboard_score_leaderboard", highscore);
+        Social.ReportScore(highscore, "CgkIjqSPppUVEAIQAg", success => { });
     }
 
     public static void ShowLeaderboardsUI()
@@ -46,5 +50,4 @@ public class PlayGamesScript : MonoBehaviour {
         Social.ShowLeaderboardUI();
     }
     #endregion /Leaderboards
-
 }
