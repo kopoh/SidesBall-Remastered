@@ -10,20 +10,27 @@ public class SceneSwitcher : MonoBehaviour
  
     public void LoadScene(string SceneName)
     {
-        SceneManager.LoadScene(SceneName);
-        //StartCoroutine(AsyncLoad(SceneName));
+        //SceneManager.LoadScene(SceneName);
+        StartCoroutine(AsyncLoad(SceneName));
     }
 
-    IEnumerator AsyncLoad(string SceneName) 
+    IEnumerator AsyncLoad(string SceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
-        while(!operation.isDone)
+        if (loadingImg != null)
         {
-            float progress = operation.progress / 0.9f;
-            loadingImg.fillAmount = progress;
+            while (!operation.isDone)
+            {
+                float progress = operation.progress / 0.9f;
+                loadingImg.fillAmount = progress; 
+                yield return null;
+            }
+        }
+        else
+        {
             yield return null;
         }
-    }
+}
 
     public void LoadURL(string url)
     {

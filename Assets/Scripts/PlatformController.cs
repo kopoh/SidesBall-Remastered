@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    public GameObject[] tilePrefabs;
+    [SerializeField] private GameObject[] tilePrefabs;
 
-    public Transform PlatformTransform;
-    private Transform playerTransform;
-    public float spawnZ = 40.7f;
-    public float tileLength = 73.7f;
-    public float safeZone = 20.0f;
-    public int amnTilesOnScreen = 7;
-    public int lastPrefabIndex = 0;
+    [SerializeField] private Transform platformTransform;
+    private Transform _playerTransform;
+    private float _spawnZ = 4;
+    private float tileLength = 5;
+    private float safeZone = 7;
+    private int amnTilesOnScreen = 6;
+    private int _lastPrefabIndex;
 
-    private List<GameObject> activeTiles; 
-   
+    private List<GameObject> _activeTiles;
     private void Start()  
     {
         Application.targetFrameRate = 60;
-        activeTiles = new List<GameObject>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _activeTiles = new List<GameObject>();
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         for (int i = 0; i < amnTilesOnScreen; i++) 
         {
@@ -33,8 +32,8 @@ public class PlatformController : MonoBehaviour
     private void Update()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        PlatformTransform.SetPositionAndRotation(new Vector3(0,0, playerTransform.position.z), new Quaternion(0,0,0,0));
-        if (playerTransform.position.z - safeZone > (spawnZ - amnTilesOnScreen * tileLength)) 
+        platformTransform.SetPositionAndRotation(new Vector3(0,0, _playerTransform.position.z), new Quaternion(0,0,0,0));
+        if (_playerTransform.position.z - safeZone > (_spawnZ - amnTilesOnScreen * tileLength)) 
         {
             SpawnTile ();
             DeleteTile ();
@@ -45,20 +44,22 @@ public class PlatformController : MonoBehaviour
     {
         GameObject go;
         if (prefabIndex == -1)
-            go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
+            go = Instantiate(tilePrefabs[RandomPrefabIndex()]);
         else
-            go = Instantiate(tilePrefabs[prefabIndex]) as GameObject;
+            go = Instantiate(tilePrefabs[prefabIndex]);
         go.transform.SetParent (transform);
-        go.transform.position = Vector3.forward * spawnZ;
-        spawnZ += tileLength;
-        activeTiles.Add (go);
+        go.transform.position = Vector3.forward * _spawnZ;
+        _spawnZ += tileLength;
+        _activeTiles.Add (go);
+        //_spawnZ -= tileLength;
+        //_playerTransform.Translate(0,0,tileLength);
     }
 
 
     private void DeleteTile() 
     {
-        Destroy(activeTiles[0]);
-        activeTiles.RemoveAt(0);
+        Destroy(_activeTiles[0]);
+        _activeTiles.RemoveAt(0);
     }
 
     private int RandomPrefabIndex()
@@ -66,13 +67,13 @@ public class PlatformController : MonoBehaviour
         if (tilePrefabs.Length <= 1)
             return 0;
 
-        int randomIndex = lastPrefabIndex;
-        while (randomIndex == lastPrefabIndex)
+        int randomIndex = _lastPrefabIndex;
+        while (randomIndex == _lastPrefabIndex)
         {
             randomIndex = Random.Range(0, tilePrefabs.Length);
         }
 
-        lastPrefabIndex = randomIndex;
+        _lastPrefabIndex = randomIndex;
         return randomIndex; 
     }
 }
